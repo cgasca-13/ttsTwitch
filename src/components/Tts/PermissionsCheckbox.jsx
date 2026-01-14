@@ -31,6 +31,9 @@ export const PermissionsCheckbox = ({ permissions, onPermissionChange }) => {
           </div>
         ))}
       </div>
+      <label className="block text-xs text-gray-500 dark:text-gray-400 mt-2 text-center">
+        Nota: El Streamer también cuenta como Sub, por lo que si se permite a los Suscriptores, el Streamer también podrá usar TTS.
+      </label>
     </div>
   );
 };
