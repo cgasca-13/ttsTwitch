@@ -7,6 +7,7 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 import { ThemeToggle } from "./ThemeToggle";
 import { VoiceSelector } from "./VoiceSelector";
 import { PermissionsCheckbox } from "./PermissionsCheckbox";
+import { BannedWords } from "./BannedWords";
 import { DEFAULT_PERMISSIONS } from "../../constants/twitch";
 
 const Tts = () => {
@@ -16,8 +17,17 @@ const Tts = () => {
   // Estados de permisos
   const [permissions, setPermissions] = useState(DEFAULT_PERMISSIONS);
   
+  // Estados de palabras baneadas
+  const [filterEnabled, setFilterEnabled] = useLocalStorage('filterEnabled', false);
+  const [bannedWords, setBannedWords] = useLocalStorage('bannedWords', []);
+  const [replacementWord, setReplacementWord] = useLocalStorage('replacementWord', '*****');
+  
   // Hook de TTS
-  const { voices, selectedVoice, setSelectedVoice, speak } = useTTS();
+  const { voices, selectedVoice, setSelectedVoice, speak } = useTTS(
+    filterEnabled,
+    bannedWords,
+    replacementWord
+  );
 
   // Manejar cambios de permisos
   const handlePermissionChange = useCallback((key, value) => {
@@ -63,6 +73,15 @@ const Tts = () => {
         <PermissionsCheckbox
           permissions={permissions}
           onPermissionChange={handlePermissionChange}
+        />
+
+        <BannedWords
+          filterEnabled={filterEnabled}
+          onFilterToggle={setFilterEnabled}
+          bannedWords={bannedWords}
+          onBannedWordsChange={setBannedWords}
+          replacementWord={replacementWord}
+          onReplacementWordChange={setReplacementWord}
         />
       </div>
   </div>

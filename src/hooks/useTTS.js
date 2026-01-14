@@ -1,11 +1,14 @@
 import { useState, useEffect, useCallback } from 'react';
-import { speakText } from '../utils/speechHelpers';
+import { speakText, filterBannedWords } from '../utils/speechHelpers';
 
 /**
  * Hook para manejar Text-to-Speech
+ * @param {boolean} filterEnabled - Si el filtro de palabras baneadas está habilitado
+ * @param {string[]} bannedWords - Lista de palabras baneadas
+ * @param {string} replacementWord - Palabra de reemplazo
  * @returns {object} - Objeto con voces, voz seleccionada y funciones
  */
-export const useTTS = () => {
+export const useTTS = (filterEnabled = false, bannedWords = [], replacementWord = '*****') => {
   const [voices, setVoices] = useState([]);
   const [selectedVoice, setSelectedVoice] = useState(null);
 
@@ -75,8 +78,9 @@ export const useTTS = () => {
   }, [getVoices, voices.length]);
 
   const speak = useCallback((text) => {
-    speakText(text, selectedVoice);
-  }, [selectedVoice]);
+    const filteredText = filterBannedWords(text, bannedWords, replacementWord, filterEnabled);
+    speakText(filteredText, selectedVoice);
+  }, [selectedVoice, bannedWords, replacementWord, filterEnabled]);
 
   return {
     voices,

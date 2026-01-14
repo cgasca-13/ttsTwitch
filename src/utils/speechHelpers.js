@@ -85,3 +85,27 @@ export const resumeSpeech = () => {
     window.speechSynthesis.resume();
   }
 };
+
+/**
+ * Filtra y reemplaza palabras baneadas en el texto
+ * @param {string} text - Texto a filtrar
+ * @param {string[]} bannedWords - Lista de palabras baneadas
+ * @param {string} replacementWord - Palabra de reemplazo (por defecto "*****")
+ * @param {boolean} filterEnabled - Si el filtro está habilitado
+ * @returns {string} - Texto filtrado
+ */
+export const filterBannedWords = (text, bannedWords = [], replacementWord = "*****", filterEnabled = false) => {
+  if (!filterEnabled || !text || bannedWords.length === 0) {
+    return text;
+  }
+
+  let filteredText = text;
+  
+  // Reemplazar cada palabra baneada (case-insensitive)
+  bannedWords.forEach(bannedWord => {
+    const regex = new RegExp(`\\b${bannedWord}\\b`, 'gi');
+    filteredText = filteredText.replace(regex, replacementWord);
+  });
+
+  return filteredText;
+};
