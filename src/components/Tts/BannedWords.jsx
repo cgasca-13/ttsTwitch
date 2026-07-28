@@ -53,8 +53,8 @@ export const BannedWords = ({
             checked={filterEnabled}
             onChange={(e) => onFilterToggle(e.target.checked)}
             className="w-5 h-5 text-blue-600 bg-gray-100 border-gray-300 rounded 
-                     focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 
-                     focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
+                      focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 
+                      focus:ring-2 dark:bg-gray-700 dark:border-gray-600 cursor-pointer"
           />
           <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
             Filtrar palabras baneadas
@@ -73,11 +73,11 @@ export const BannedWords = ({
             placeholder="*****"
             disabled={!filterEnabled}
             className="w-full p-2 rounded-lg border-2 bg-gray-50 dark:bg-gray-700 
-                     border-gray-300 dark:border-gray-600 placeholder-gray-400 
-                     dark:placeholder-gray-500 focus:border-blue-500 
-                     dark:focus:border-blue-400 focus:outline-none
-                     text-gray-900 dark:text-white disabled:opacity-50 
-                     disabled:cursor-not-allowed"
+                    border-gray-300 dark:border-gray-600 placeholder-gray-400 
+                    dark:placeholder-gray-500 focus:border-blue-500 
+                    dark:focus:border-blue-400 focus:outline-none
+                    text-gray-900 dark:text-white disabled:opacity-50 
+                    disabled:cursor-not-allowed"
           />
         </div>
 
@@ -95,19 +95,19 @@ export const BannedWords = ({
               placeholder="Escribe una palabra..."
               disabled={!filterEnabled}
               className="flex-1 p-2 rounded-lg border-2 bg-gray-50 dark:bg-gray-700 
-                       border-gray-300 dark:border-gray-600 placeholder-gray-400 
-                       dark:placeholder-gray-500 focus:border-blue-500 
-                       dark:focus:border-blue-400 focus:outline-none
-                       text-gray-900 dark:text-white disabled:opacity-50 
-                       disabled:cursor-not-allowed"
+                      border-gray-300 dark:border-gray-600 placeholder-gray-400 
+                      dark:placeholder-gray-500 focus:border-blue-500 
+                      dark:focus:border-blue-400 focus:outline-none
+                      text-gray-900 dark:text-white disabled:opacity-50 
+                      disabled:cursor-not-allowed"
             />
             <button
               onClick={handleAddWord}
               disabled={!filterEnabled || !inputWord.trim()}
               className="px-4 py-2 bg-blue-600 text-white rounded-lg 
-                       hover:bg-blue-700 focus:outline-none focus:ring-2 
-                       focus:ring-blue-500 disabled:opacity-50 
-                       disabled:cursor-not-allowed transition-colors"
+                      hover:bg-blue-700 focus:outline-none focus:ring-2 
+                      focus:ring-blue-500 disabled:opacity-50 
+                      disabled:cursor-not-allowed transition-colors"
             >
               Agregar
             </button>
@@ -127,16 +127,16 @@ export const BannedWords = ({
                 <span
                   key={index}
                   className="inline-flex items-center px-3 py-1 rounded-full 
-                           text-sm font-medium bg-red-100 text-red-800 
-                           dark:bg-red-900 dark:text-red-200"
+                          text-sm font-medium bg-red-100 text-red-800 
+                          dark:bg-red-900 dark:text-red-200"
                 >
                   {word}
                   <button
                     onClick={() => handleRemoveWord(word)}
                     disabled={!filterEnabled}
                     className="ml-2 text-red-600 hover:text-red-800 
-                             dark:text-red-300 dark:hover:text-red-100 
-                             disabled:opacity-50 disabled:cursor-not-allowed"
+                            dark:text-red-300 dark:hover:text-red-100 
+                            disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     ×
                   </button>
