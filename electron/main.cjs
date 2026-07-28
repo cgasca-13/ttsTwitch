@@ -3,10 +3,14 @@ const fs = require("fs");
 const http = require("http");
 const path = require("path");
 const { URL } = require("url");
+const { startTtsBackend } = require("./tts-backend.cjs");
 
 const DEFAULT_URL = "http://127.0.0.1:3000";
 const STATIC_HOST = "127.0.0.1";
 const STATIC_PORT = Number(process.env.ELECTRON_STATIC_PORT || 3067);
+
+let staticServerInstance;
+let ttsBackendInstance;
 
 function getMimeType(filePath) {
   switch (path.extname(filePath).toLowerCase()) {
@@ -98,6 +102,7 @@ function startStaticServer() {
 
 function createWindow() {
   const startUrl = process.env.ELECTRON_START_URL || DEFAULT_URL;
+  const ttsApiBaseUrl = process.env.ELECTRON_TTS_API_URL || "";
 
   const mainWindow = new BrowserWindow({
     width: 1280,
@@ -111,6 +116,7 @@ function createWindow() {
       nodeIntegration: false,
       sandbox: false,
     },
+    additionalArguments: ttsApiBaseUrl ? [`--tts-api-base-url=${ttsApiBaseUrl}`] : [],
   });
 
   mainWindow.removeMenu();
@@ -124,9 +130,12 @@ function createWindow() {
 }
 
 app.whenReady().then(async () => {
+  ttsBackendInstance = await startTtsBackend(Number(process.env.ELECTRON_TTS_PORT || 0));
+  process.env.ELECTRON_TTS_API_URL = ttsBackendInstance.url;
+
   if (!process.env.ELECTRON_START_URL) {
-    const staticServer = await startStaticServer();
-    process.env.ELECTRON_START_URL = staticServer.url;
+    staticServerInstance = await startStaticServer();
+    process.env.ELECTRON_START_URL = staticServerInstance.url;
   }
 
   createWindow();
@@ -141,5 +150,15 @@ app.whenReady().then(async () => {
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
     app.quit();
+  }
+});
+
+app.on("before-quit", () => {
+  if (ttsBackendInstance?.server) {
+    ttsBackendInstance.server.close();
+  }
+
+  if (staticServerInstance?.server) {
+    staticServerInstance.server.close();
   }
 });

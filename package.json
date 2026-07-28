@@ -8,7 +8,7 @@
     "dev:desktop": "node scripts/electron-dev.cjs",
     "build": "next build",
     "start": "next start",
-    "start:desktop": "electron .",
+    "start:desktop": "npm run build && electron .",
     "dist:desktop": "npm run build && electron-builder --win nsis",
     "lint": "next lint"
   },
@@ -35,6 +35,7 @@
     }
   },
   "dependencies": {
+    "edge-tts-universal": "^1.4.0",
     "next": "^16.2.12",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
