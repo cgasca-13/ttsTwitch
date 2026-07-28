@@ -1,7 +1,7 @@
-Bot de Twitch para generar un TTS (Text to speech) para canales de Twitch
-Funciona mejor en el navegador Edge o Chrome, puede que en otros navegadores no tengas voces disponibles o tengas menos, lo ideal es el navegador mencionado.
+## Bot de Twitch para generar un TTS (Text to speech) para canales de Twitch
 
-En la app de escritorio con Electron, el TTS usa un backend local del propio proyecto basado en Edge TTS para mostrar más voces e idiomas.
+- En la app de escritorio con Electron, el TTS usa un backend local del propio proyecto basado en Edge TTS para mostrar más voces e idiomas.
+- Su versión web funciona mejor en Edge o Chrome, puede que en otros navegadores no tengas voces disponibles o tengas menos, lo ideal es el navegador mencionado.
 
 ## Desktop
 
