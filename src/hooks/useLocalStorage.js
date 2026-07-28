@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 /**
  * Hook personalizado para manejar localStorage de forma reactiva
@@ -7,19 +7,23 @@ import { useState, useEffect } from 'react';
  * @returns {[any, Function]} - [valor, función para actualizar]
  */
 export const useLocalStorage = (key, initialValue) => {
-  const [storedValue, setStoredValue] = useState(() => {
+  const [storedValue, setStoredValue] = useState(initialValue);
+
+  useEffect(() => {
     if (typeof window === 'undefined') {
-      return initialValue;
+      return;
     }
-    
+
     try {
       const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+
+      if (item !== null) {
+        setStoredValue(JSON.parse(item));
+      }
     } catch (error) {
       console.error(`Error loading localStorage key "${key}":`, error);
-      return initialValue;
     }
-  });
+  }, [key]);
 
   const setValue = (value) => {
     try {

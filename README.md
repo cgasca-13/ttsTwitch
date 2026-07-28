@@ -1,6 +1,30 @@
-Bot de Twitch para generar un TTS (Text to speech) para escuchar en el stream
-Funciona mejor en el navegador Edge, puede que en otros navegadores no tengas voces disponibles o tengas menos, lo ideal es el navegador mencionado.
+Bot de Twitch para generar un TTS (Text to speech) para canales de Twitch
+Funciona mejor en el navegador Edge o Chrome, puede que en otros navegadores no tengas voces disponibles o tengas menos, lo ideal es el navegador mencionado.
 
+En la app de escritorio con Electron, el TTS usa un backend local del propio proyecto basado en Edge TTS para mostrar más voces e idiomas.
+
+## Desktop
+
+La app también puede ejecutarse como escritorio con Electron.
+
+```bash
+npm run dev:desktop
+```
+
+Para probar la versión exportada localmente:
+
+```bash
+npm run build
+npm run start:desktop
+```
+
+Para generar el instalador de Windows:
+
+```bash
+npm run dist:desktop
+```
+
+El instalador se genera en `release/`.
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
